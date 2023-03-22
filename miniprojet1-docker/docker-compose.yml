@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  api:
+    image: miniproj1-studentlist:v1
+    container_name: api
+    volumes:
+      - $PWD/simple_api/student_age.json:/data/student_age.json
+    networks:
+      - miniproj1_network
+    ports:
+      -"8500:5000"
+  website:
+    image: php:apache
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    volumes:
+      - ./website:/var/www/html
+    networks:
+      - miniproj1_network
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+networks:
+  miniproj1_network:

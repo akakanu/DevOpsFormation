@@ -1,0 +1,15 @@
+erreur obtenu lorsque je travaille le mini-projet
+
+DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+ERROR: Double requirement given: python-dotenv==0.14.0 (already in python-dotenv==0.14.0ip, name='python-dotenv')
+WARNING: You are using pip version 20.0.2; however, version 20.3.4 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+
+
+==================
+Je n'ai pas pu travailler correctement ce mini-projet
+Je ne sais pas à quoi cela est dû.
+
+Je pense remplacer l'application par une application autre.
+
+Merci.
