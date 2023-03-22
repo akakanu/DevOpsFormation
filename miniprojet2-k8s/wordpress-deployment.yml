@@ -5,15 +5,10 @@ metadata:
   labels:
     app: wordpress
 spec:
-  replicas: 2
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
   selector:
     matchLabels:
       app: wordpress
+    strategy: null
   template:
     metadata:
       labels:
@@ -27,17 +22,32 @@ spec:
               name: wordpress-data
           ports:
             - containerPort: 80
-      env:
-        - name: WORDPRESS_DB_HOST
-          value: password
-        - name: WORDPRESS_DB_USER
-          value: easytraining
-        - name: WORDPRESS_DB_PASSWORD
-          value: easy
-        - name: WORDPRESS_DB_NAME
-          value: easy
+          env:
+            - name: WORDPRESS_DB_HOST
+              value: wordpress-mysql
+            - name: WORDPRESS_DB_USER
+              value: student-b12
+            - name: WORDPRESS_DB_PASSWORD
+              value: password
+            - name: WORDPRESS_DB_NAME
+              value: student-b12
       volumes:
-        - name: wordpress-data
-          hostPath:
-            path: /data-volume
-            type: Directory
+      - name: wordpress-data
+        hostPath:
+          path: /data-volume
+          type: Directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
