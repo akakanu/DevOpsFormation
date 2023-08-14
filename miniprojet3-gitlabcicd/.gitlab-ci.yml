@@ -1,5 +1,5 @@
 variables:
-  APP_NAME: leukeu
+  APP_NAME: leukeu-static-website
   REVIEW_APP_NAME: leukeu-${CI_COMMIT_REF_NAME}
   REVIEW_API_ENDPOINT: ip10-0-1-3-cj45u10asghgqh6mlf8g-1993.direct.docker.labs.eazytraining.fr
   REVIEW_APP_ENDPOINT: ip10-0-1-3-cj45u10asghgqh6mlf8g-80.direct.docker.labs.eazytraining.fr
@@ -32,35 +32,37 @@ stages:
   image: alpine
   script:
     - apk --no-cache add curl
-    - curl -k "https://$DOMAIN" | grep "Hello world!"
+    - curl -k "https://$DOMAIN" | grep "Dimension"
 
 docker-build:
   # Use the official docker image.
   stage: build
   script:
-    - docker build -t  alpinehelloworld .
-    - docker save alpinehelloworld > alpinehelloworld.tar
+    - docker build -t ${APP_NAME} .
+    - docker save ${APP_NAME} > ${APP_NAME}.tar
   artifacts:
     paths:
-      - alpinehelloworld.tar    
+      - ${APP_NAME}.tar
+    when: on_success
+    expire_in: 2 days
 
 
 test acceptation:
   # Official docker image.
   stage: Test acceptation
   script:
-    - docker load < alpinehelloworld.tar
-    - docker run -d -p 80:5000 -e PORT=5000 --name webapp alpinehelloworld
+    - docker load < ${APP_NAME}.tar
+    - docker run -d -p 80:5000 -e PORT=5000 --name ${APP_NAME}
     - sleep 5
     - apk --no-cache add curl
-    - curl "http://docker" | grep  "Hello world!"
+    - curl "http://docker" | grep -i "Dimension"
 
 release image:
   stage: Release image
   script:
-    - docker load < alpinehelloworld.tar
-    - docker tag alpinehelloworld "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
-    - docker tag alpinehelloworld "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
+    - docker load < ${APP_NAME}.tar
+    - docker tag ${APP_NAME} "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
+    - docker tag ${APP_NAME} "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     - docker push "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
     - docker push "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
