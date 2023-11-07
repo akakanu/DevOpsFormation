@@ -1,7 +1,6 @@
 ---
 - name: Install docker on a Centos 7 machine
 
-gather_facts: false
 hosts: all
 become: true
 
