@@ -35,9 +35,6 @@
         url: https://bootstrap.pypa.io/get-pip.py
         dest: /tmp/get-pip.py
 
-    - name: install python-pip
-      command: python3 /tmp/get-pip.py
-
     - name: Install docker python
       pip:
         name: docker-py
@@ -55,13 +52,11 @@
     - name: Install Docker
       yum:
         name: docker
-
     - name: Start Docker service
       service:
         name: docker
         state: started
         enabled: yes
-  
     - name: Add remote user to docker group
       user:
         name: "{{ ansible_user }}"
