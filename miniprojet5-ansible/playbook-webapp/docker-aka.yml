@@ -1,36 +1,37 @@
 ---
 - name: Install docker on a Centos 7 machine
 
-hosts: all
-become: true
+  gather_facts: false
+  hosts: all
+  become: true
 
-tasks:
+  tasks:
 
-- name: Remove docker if installed from CentOS repo
-  yum:
-       name: "{{ item }}"
-       state: removed
+    - name: Remove docker if installed from CentOS repo
+      yum:
+        name: "{{ item }}"
+        state: removed
 
-   with_items:
-    - docker
-    - docker-client
-    - docker-client-latest
-    - docker-common
-    - docker-latest
-    - docker-latest-logrotate
-    - docker-logrotate
-    - docker-engine
+      with_items:
+        - docker
+        - docker-client
+        - docker-client-latest
+        - docker-common
+        - docker-latest
+        - docker-latest-logrotate
+        - docker-logrotate
+        - docker-engine
 
-- name: Install yum utils
-  yum:
-      name: "{{ item }}"
-      state: latest
-  with_items:
+    - name: Install yum utils
+      yum:
+        name: "{{ item }}"
+        state: latest
+      with_items:
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
         - python3
-- name: download pip script
+    - name: download pip script
       get_url:
         url: https://bootstrap.pypa.io/get-pip.py
         dest: /tmp/get-pip.py
@@ -43,28 +44,28 @@ tasks:
         name: docker-py
         executable: /usr/local/bin/pip3
 
-- name: Add Docker repo
-  get_url:
-      url: https://download.docker.com/linux/centos/docker-ce.repo
-      dest: /etc/yum.repos.d/docker-ce.repo
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
 
-- name: Enable Docker Edge & Test repo
+    - name: Enable Docker Edge & Test repo
 
-   #### Something it is missing here ####
+    #### Something it is missing here ####
 
-- name: Install Docker
-  yum:
-    name: docker-ce
-    state: latest
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: latest
 
-- name: Start Docker service
-  service:
-    name: docker
-    state: started
-    enabled: yes
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
   
-- name: Add remote user to docker group
-  user:
-      name: "{{ ansible_user }}"
-      groups: dockerroot
-      append: yes
+    - name: Add remote user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: dockerroot
+        append: yes
