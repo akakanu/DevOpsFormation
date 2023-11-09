@@ -31,7 +31,7 @@
         dest: /tmp/get-pip.py
     - name: Install docker python
       pip:
-        name: docker-py
+        name: docker
         executable: /usr/local/bin/pip3
     - name: Add Docker repo
       get_url:
