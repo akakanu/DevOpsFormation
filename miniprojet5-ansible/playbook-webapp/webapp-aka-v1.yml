@@ -1,7 +1,7 @@
 ---
 - name: "install webapp-aka v1"
   become: yes
-  hosts: prod
+  hosts: all
   tags: webapp-aka_v1
   tasks:
     - name: "Remove folder"

@@ -4,6 +4,7 @@
   gather_facts: false
   hosts: all
   become: true
+  become_ask_pass: false
 
   tasks:
 
