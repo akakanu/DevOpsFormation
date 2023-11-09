@@ -25,13 +25,18 @@
         - device-mapper-persistent-data
         - lvm2
         - python3
+    - name: install python-setuptools by yum
+      yum:
+        name: python-setuptools
+        state: present
+        update_cache: yes
     - name: download pip script
       get_url:
         url: https://bootstrap.pypa.io/get-pip.py
         dest: /tmp/get-pip.py
     - name: Install docker python
       pip:
-        name: docker
+        name: docker-py
         executable: /usr/local/bin/pip3
     - name: Add Docker repo
       get_url:
