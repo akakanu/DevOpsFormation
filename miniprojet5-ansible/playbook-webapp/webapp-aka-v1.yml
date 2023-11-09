@@ -21,7 +21,6 @@
       git:
         repo: https://github.com/diranetafen/static-website-example.git
         dest: /home/{{ ansible_user }}/webapp/
-        version: release-0.10
     - name: Add static site config files
       template:
         src: templates/index.html.j2
