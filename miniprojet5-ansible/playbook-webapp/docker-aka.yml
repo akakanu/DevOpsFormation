@@ -4,23 +4,11 @@
   hosts: all
   become: yes
   tasks:
-    - name: Remove docker if installed from CentOS repo
+    - name: Install pre-requisite packages
       yum:
-        name: "{{ item }}"
-        state: removed
-      with_items:
-        - docker
-        - docker-client
-        - docker-client-latest
-        - docker-common
-        - docker-latest
-        - docker-latest-logrotate
-        - docker-logrotate
-        - docker-engine
-    - name: Install yum utils
-      yum:
-        name: "{{ item }}"
-      with_items:
+        name: "{{item}}"
+        state: latest
+      loop:
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
