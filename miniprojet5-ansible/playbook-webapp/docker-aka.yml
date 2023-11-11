@@ -26,7 +26,10 @@
       yum:
         name: docker-ce
         state: present
-    - name: " Starting and Enabling Docker service"
+    - name: " Update"
+      systemctl:
+        daemon-reload: yes
+    - name: " Starting and Enabling Docker service"      
       service:
         name: docker
         state: started
