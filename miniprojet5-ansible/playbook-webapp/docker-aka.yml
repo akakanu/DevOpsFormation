@@ -30,7 +30,6 @@
       systemd:
         state: restarted
         daemon_reload: true
-        name: crond
     - name: " Starting and Enabling Docker service"      
       service:
         name: docker
