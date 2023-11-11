@@ -22,10 +22,10 @@
       get_url:
         url: https://bootstrap.pypa.io/get-pip.py
         dest: /tmp/get-pip.py
-    - name: Install docker python
+    - name: Install docker libs with pip
       pip:
-        name: docker-py
-        executable: /usr/local/bin/pip3
+        name: docker
+        state: present
     - name: Add Docker repo
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
