@@ -3,6 +3,9 @@
   become: yes
   hosts: all
   tags: webapp-aka_v1
+  vars:
+    page_title: Bienvenue
+    page_description: Ceci est ma page d'accueil.
   tasks:
     - name: "Remove folder"
       file:
