@@ -26,11 +26,9 @@
       yum:
         name: docker-ce
         state: present
-    - name: Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes
+    - name: "Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes"
       systemd:
-        state: restarted
         daemon_reload: true
-        name: .service
     - name: " Starting and Enabling Docker service"      
       service:
         name: docker
