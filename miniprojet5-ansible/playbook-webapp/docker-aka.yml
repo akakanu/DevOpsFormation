@@ -29,10 +29,6 @@
     - name: "Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes"
       systemd:
         daemon_reload: true
-    - name: "Install Docker CLI"
-      apt:
-        name: docker-compose
-        state: present
     - name: "Enable the Docker daemon in systemd"
       systemd:
         name: docker
