@@ -24,7 +24,7 @@
         mode: 0644
     - name: " Installing Docker latest version"
       yum:
-        name: docker-ce
+        name: docker
         state: present
     - name: "Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes"
       systemd:
