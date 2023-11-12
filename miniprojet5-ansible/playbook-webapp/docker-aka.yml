@@ -12,6 +12,7 @@
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
+        - docker-compose
     - name: install python-setuptools by yum
       yum:
         name: python-setuptools
