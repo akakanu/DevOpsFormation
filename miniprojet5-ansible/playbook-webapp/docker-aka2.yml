@@ -1,9 +1,15 @@
+
 ---
 - name: Install Docker and Docker Compose on CentOS
   gather_facts: false
   hosts: all
   become: true
-
+    ### erreur à ce niveau: Fail to UNREACHABLE! => { "changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host x.x.x.x port 22: Connection timed out\r\n", "unreachable": true }
+    ### Answers: The ansible-playbook command probably fails because the path to the ssh-key is not defined. Ansible recommends to use the ssh-agent:
+    ### $ ssh-agent bash
+    ### $ ssh-add ~/.ssh/id_rsa
+    ### Another way to add private key files without using ssh-agent is using ansible_ssh_private_key_file in an inventory file as explained here
+    ### https://docs.ansible.com/ansible/latest/user_guide/connection_details.html
   tasks:
     - name: Upgrade all packages
       yum: name=* state=latest
@@ -12,7 +18,7 @@
       command: systemctl status docker
       register: docker_check
       ignore_errors: yes
-
+    
     - name: Download the Docker installer
       get_url:
         url: https://get.docker.com/
