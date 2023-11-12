@@ -35,11 +35,7 @@
         url: https://download.docker.com/linux/centos/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
         mode: 0644
-
-    - name: Enable Docker Edge & Test repo
-
-      #### Something it is missing here ####
-
+        
     - name: Install Docker
       yum:
         name: docker-ce
