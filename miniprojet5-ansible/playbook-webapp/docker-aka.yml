@@ -12,7 +12,6 @@
         - yum-utils
         - device-mapper-persistent-data
         - lvm2
-        - docker-compose
     - name: install python-setuptools by yum
       yum:
         name: python-setuptools
@@ -30,8 +29,14 @@
     - name: "Restart service cron on centos, in all cases, also issue daemon-reload to pick up config changes"
       systemd:
         daemon_reload: true
-    - name: " Starting and Enabling Docker service"      
-      service:
+    - name: Enable the Docker daemon in systemd
+      systemd:
+        name: docker
+        enabled: yes
+        masked: no
+    - name: Start the Docker daemon
+      systemd:
         name: docker
         state: started
-        enabled: yes
+        masked: no
+    
